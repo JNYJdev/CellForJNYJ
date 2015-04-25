@@ -12,10 +12,18 @@
 
 @class JNYJCellButton;
 
+@protocol JNYJCellDelegate <NSObject>
+@optional
+-(void)callback_cell_click:(id)sender;
+-(void)callback_cell_details:(id)sender;
+-(void)callback_cell_checkbox:(id)sender;
+@end
+
 @interface JNYJCell : UITableViewCell{
     JNYJCellButton *buttonCheckbox;
     JNYJCellButton *buttonCell;
     JNYJCellButton *buttonShowDetails;
+    UIImageView     *imageViewLine;
 }
 
 @property(nonatomic,strong)UIView *viewBG;
@@ -24,12 +32,20 @@
 @property(nonatomic,strong)UIImageView *imageViewLogo;
 @property(nonatomic,strong)UIImageView *imageViewLogo_showDetail;
 
+@property(nonatomic,strong)NSDictionary *dicValues;
+
+@property(nonatomic,weak)id<JNYJCellDelegate> callback_delegate;
+
+
 -(void)setCellHeight:(CGFloat)height;
 
 -(void)event_cellSelected:(id)sender;
+-(void)event_selectedCheckbox:(id)sender;
 -(void)event_showDetail:(id)sender;
 
 -(void)setCellValues:(id)sender;
+
+-(void)setHiddenLine:(BOOL)hidden;
 
 +(JNYJCell *)newCell;
 @end

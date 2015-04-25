@@ -166,14 +166,31 @@
         [button_ setBackgroundColor:[UIColor clearColor]];
         [button_ setAlpha:0.6];
         //
+        rect_ = self.viewBG.frame;
+        imageView_ = [[UIImageView alloc] initWithFrame:
+                      CGRectMake(0,
+                                 rect_.size.height-0.5,
+                                 rect_.size.width,
+                                 0.5)];
+        imageViewLine = imageView_;
+        [view_ addSubview:imageView_];
+        [imageView_ setBackgroundColor:[UIColor grayColor]];
+        //
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         //
     }
     
 }
 -(void)setCellValues:(id)sender{
-    
+    if(sender && [sender isKindOfClass:[NSDictionary class]]){
+        self.dicValues = [NSDictionary dictionaryWithDictionary:sender];
+    }
 }
+
+-(void)setHiddenLine:(BOOL)hidden{
+    [imageViewLine setHidden:hidden];
+}
+
 -(void)setImageViewLogo:(UIImageView *)imageViewLogo{
     [_imageViewLogo removeFromSuperview];
     _imageViewLogo = nil;
